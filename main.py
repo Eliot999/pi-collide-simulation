@@ -7,7 +7,7 @@ from block import Block
 SIZE = WIDTH, HEIGHT = 1200, 800
 BLACK = 0, 0, 0
 WHITE = 200, 200, 200
-DIGITS = 5
+DIGITS = 8
 TIME_STEPS = 20000
 counter = count()
 
@@ -27,7 +27,7 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-    for i in range(TIME_STEPS):
+    for _ in range(TIME_STEPS):
         if block1.collide(block2):
             v1 = block1.bounce(block2)
             v2 = block2.bounce(block1)
