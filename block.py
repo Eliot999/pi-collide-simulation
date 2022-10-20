@@ -1,3 +1,5 @@
+from numba import njit
+
 HEIGHT = 20
 
 
@@ -10,12 +12,12 @@ class Block:
         self.m = m
 
     def collide(self, block):
-        return not (self.x + self.w < block.x) or (self.x > block.x + block.w)
+        return self.x + self.w >= block.x or (self.x > block.x + block.w)
 
     def bounce(self, block):
         sum_M = self.m + block.m
-        new_V = (self.m-block.m)/sum_M * self.v
-        new_V += (2 * block.m/sum_M) * block.v
+        new_V = (self.m - block.m) / sum_M * self.v
+        new_V += (2 * block.m / sum_M) * block.v
         return new_V
 
     def hit_wall(self):
@@ -30,4 +32,4 @@ class Block:
         self.x += self.v
 
     def prep_show(self):
-        return (self.x, self.y, self.w, self.w)
+        return self.x, self.y, self.w, self.w
